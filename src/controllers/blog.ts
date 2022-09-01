@@ -6,7 +6,7 @@ const getItem = (req:Request, res:Response) => {
   try {
     
   } catch (e) {
-    handleHttp(res, 'ERROR_GET_ITEM')
+    handleHttp(res, 'ERROR_GET_BLOG')
   }
 }
 
@@ -15,7 +15,7 @@ const getItems = (req:Request, res:Response) => {
   try {
     
   } catch (e) {
-    handleHttp(res, 'ERROR_GET_ITEMS')
+    handleHttp(res, 'ERROR_GET_BLOGS')
   }
 }
 
@@ -25,7 +25,7 @@ const postItem = ({ body }:Request, res:Response) => {
     res.send(body)
     
   } catch (e) {
-    handleHttp(res, 'ERROR_POST_ITEM')
+    handleHttp(res, 'ERROR_POST_BLOG')
   }
 }
 
@@ -34,7 +34,7 @@ const updateItem = (req:Request, res:Response) => {
   try {
     
   } catch (e) {
-    handleHttp(res, 'ERROR_UPDATE_ITEM')
+    handleHttp(res, 'ERROR_UPDATE_BLOG')
   }
 }
 
@@ -43,7 +43,7 @@ const deleteItem = (req:Request, res:Response) => {
   try {
     
   } catch (e) {
-    handleHttp(res, 'ERROR_DELETE_ITEM')
+    handleHttp(res, 'ERROR_DELETE_BLOG')
   }
 }
 
