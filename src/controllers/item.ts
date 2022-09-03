@@ -1,4 +1,5 @@
 import {Request, Response} from 'express'
+import { insertItem } from '../services/item'
 import { handleHttp } from '../utils/error.hendle'
 
 // ! Obtener un item
@@ -20,12 +21,13 @@ const getItems = (req:Request, res:Response) => {
 }
 
 // ! Crear un item
-const postItem = ({ body }:Request, res:Response) => {
+const postItem = async({ body }:Request, res:Response) => {
   try {
-    res.send(body)
+    const responseItem = await insertItem(body)
+    res.send(responseItem);
     
   } catch (e) {
-    handleHttp(res, 'ERROR_POST_ITEM')
+    handleHttp(res, 'ERROR_POST_ITEM', e);
   }
 }
 
@@ -52,6 +54,5 @@ export {
   getItems,
   postItem,
   updateItem,
-  deleteItem
-
+  deleteItem,
 }
