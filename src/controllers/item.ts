@@ -1,13 +1,12 @@
 import {Request, Response} from 'express'
-import { insertCar, getCars, getCar } from '../services/item'
+import { insertCar, getCars, getCar, updateCar, deleteCar} from '../services/item'
 import { handleHttp } from '../utils/error.hendle'
 
 // ! Crear un item
 const postItem = async({ body }:Request, res:Response) => {
   try {
-    const response = await insertCar(body)
-    res.send(response);
-    
+    const response = await insertCar(body);    
+    res.send(response);    
   } catch (e) {
     handleHttp(res, 'ERROR_POST_ITEM', e);
   }
@@ -28,7 +27,8 @@ const getItem = async ({ params }:Request, res:Response) => {
   try {
     const { id } = params;
     const response =  await getCar(id);
-    res.send(response);
+    const data = response ? response : 'NOT_FOUND';
+    res.json({message: data});    
   } catch (e) {
     handleHttp(res, 'ERROR_GET_ITEM', e)
   }
@@ -36,18 +36,22 @@ const getItem = async ({ params }:Request, res:Response) => {
 
 
 // ! Actualizar un item
-const updateItem = (req:Request, res:Response) => {
+const updateItem = async ({body, params}:Request, res:Response) => {
   try {
-    
+    const {id} = params;
+    const response = await updateCar(id, body);
+    res.send(response);
   } catch (e) {
     handleHttp(res, 'ERROR_UPDATE_ITEM')
   }
 }
 
 // ! Eliminar un item
-const deleteItem = (req:Request, res:Response) => {
+const deleteItem = async ({params}:Request, res:Response) => {
   try {
-    
+    const { id } = params;
+    const response = await deleteCar(id)
+    res.send(response);
   } catch (e) {
     handleHttp(res, 'ERROR_DELETE_ITEM')
   }

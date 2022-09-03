@@ -19,8 +19,22 @@ const getCar =  async (id:string) => {
   return response;
 }
 
+const updateCar = async (id:string, data: Car) => {
+  // Cactualizamos un item
+  const response = await ItemModel.findOneAndUpdate({ _id: id }, data, {new: true});
+  return response;
+}
+
+const deleteCar = async (id:string) => {
+  // elimina ub iem
+  const response = await ItemModel.remove({ _id: id });
+  return response;
+}
+
 export { 
   insertCar,
   getCars,
   getCar,
+  updateCar,
+  deleteCar,
 };
