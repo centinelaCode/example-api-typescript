@@ -1,10 +1,26 @@
 import { Car } from "../interfaces/interfaces";
 import ItemModel from "../models/item";
 
-const insertItem = async (item: Car) => {
+const insertCar = async (item: Car) => {
   // insertamos en la db y la retornamos
-  const responseInsert = await ItemModel.create(item)
-  return responseInsert;
+  const response = await ItemModel.create(item)
+  return response;
 }
 
-export { insertItem };
+const getCars =  async () => {
+  // obtenesmo todos los items
+  const response = await ItemModel.find({});
+  return response;
+}
+
+const getCar =  async (id:string) => {
+  // obtenesmo todos los items
+  const response = await ItemModel.findOne({_id: id});
+  return response;
+}
+
+export { 
+  insertCar,
+  getCars,
+  getCar,
+};
