@@ -7,8 +7,17 @@ const registrerController = async ({body}: Request, res:Response) => {
 }
 
 
-const loginController = async (req: Request, res:Response) => {
-  
+const loginController = async ({body}: Request, res:Response) => {
+  const {email, password} = body;
+  const reponseUser  = await loginUser( {email, password} );
+
+  if(reponseUser === 'PASSWORD_INCORRECT'){
+    res.status(403);
+    res.send(reponseUser);
+  } else {
+    res.send(reponseUser);
+  }
+
 }
 
 
