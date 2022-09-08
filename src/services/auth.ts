@@ -2,6 +2,7 @@ import { Auth } from "../interfaces/auth.interface";
 import { User } from "../interfaces/user.Interface";
 import UserModel from "../models/user";
 import {encrypt, verified} from '../utils/bcrypt.handle'
+import { generateToken } from "../utils/jwt.handle";
 
 const registerNewUser = async ({email, password, name}: User) => {
   const checkIs = await UserModel.findOne({email: email});
@@ -15,6 +16,8 @@ const registerNewUser = async ({email, password, name}: User) => {
   return registerNewUser;
 }
 
+
+
 const loginUser = async({ email, password }: Auth) => {
   const checkIs = await UserModel.findOne({email: email});
   if (!checkIs) return "NOT_FOUND_USER";
@@ -25,10 +28,17 @@ const loginUser = async({ email, password }: Auth) => {
   // si no hace math la contraseña retronamos un mensaje
   if(!isCorrect) return "PASSWORD_INCORRECT";
 
-  // Si hace match la contraseña retornamos el usario
-  return checkIs;
-  
+  // se genera el token
+  const token = await generateToken(checkIs.id)
+  console.log(token)
 
+  // Si hace match la contraseña retornamos un objeto
+  const data = {
+    token,
+    user: checkIs,
+  }
+
+  return data;
 }
 
 export {
