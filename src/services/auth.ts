@@ -29,7 +29,7 @@ const loginUser = async({ email, password }: Auth) => {
   if(!isCorrect) return "PASSWORD_INCORRECT";
 
   // se genera el token
-  const token = await generateToken(checkIs.id)
+  const token = await generateToken(checkIs.email)
   console.log(token)
 
   // Si hace match la contraseña retornamos un objeto

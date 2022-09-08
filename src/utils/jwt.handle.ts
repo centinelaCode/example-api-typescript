@@ -14,8 +14,11 @@ const generateToken = async (id: string) => {
 
 
 
-const verifyToken = async () => {}
-
+const verifyToken = (jwt: string) => {
+  const isjwtOK = verify(jwt, jwtSecret);
+  return isjwtOK;
+}
+  
 
 export {
   generateToken,
