@@ -1,10 +1,9 @@
 import {Request, Response} from 'express'
 import { JwtPayload } from 'jsonwebtoken';
+import { RequestExt } from '../interfaces/req-ext.interface';
 import { handleHttp } from '../utils/error.hendle'
 
-interface RequestExt extends Request {
-  user?: string | JwtPayload; 
-}
+
 
 // ! Obtener una lista de items
 const getItems = (req:RequestExt, res:Response) => {

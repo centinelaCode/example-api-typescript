@@ -12,6 +12,10 @@ app.use(cors());
 app.use(express.json());
 app.use(router);
 
+// testing
+// console.log(`${process.cwd()}/storage`);
+// console.log(`${__dirname}/storage`);
+
 db().then(() => console.log('Connect MongoDB Success'));
 
 
